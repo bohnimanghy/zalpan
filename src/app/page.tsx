@@ -1,6 +1,7 @@
 import QRCode from "qrcode";
 import { Reveal } from "@/components/Reveal";
 import { ZalpanTour } from "@/components/ZalpanTour";
+import { ZalpanLogo } from "@/components/ZalpanLogo";
 
 const DISPLAY = "var(--font-bricolage), 'Bricolage Grotesque', sans-serif";
 const MONO = "var(--font-plex-mono), 'IBM Plex Mono', monospace";
@@ -281,15 +282,8 @@ export default function ZalpanPage() {
         }}
       >
         <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between gap-6 px-[18px] md:px-10">
-          <a href="#top" className="flex shrink-0 items-center gap-[11px] no-underline">
-            <span className="flex h-[38px] w-[38px] items-center justify-center rounded-[11px]" style={{ background: "linear-gradient(150deg,var(--or2),var(--or))", boxShadow: "0 6px 16px -6px rgba(240,83,28,0.6)" }}>
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns={io}>
-                <path d="M6 13c1.6 0 1.6-2 3.2-2s1.6 2 3.2 2 1.6-2 3.2-2 1.6 2 3.2 2" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" />
-                <path d="M5 17.2c1.7 0 1.7-1.7 3.5-1.7s1.7 1.7 3.5 1.7 1.7-1.7 3.5-1.7 1.7 1.7 3.5 1.7" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" opacity="0.55" />
-                <circle cx="12" cy="6.4" r="1.5" fill="#fff" />
-              </svg>
-            </span>
-            <span style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: 23, letterSpacing: "-0.03em", color: "var(--zink)" }}>Zalpan</span>
+          <a href="#top" className="flex shrink-0 items-center no-underline" aria-label="Zalpan — home">
+            <ZalpanLogo style={{ height: 22, width: "auto", color: "#1f2a37" }} />
           </a>
           <nav className="hidden items-center gap-[30px] md:flex">
             {[
@@ -787,14 +781,8 @@ export default function ZalpanPage() {
       {/* ============ FOOTER ============ */}
       <footer style={{ background: "var(--charcoal)", color: "#B5AC9E", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-6 px-[18px] py-11 md:px-10">
-          <div className="flex items-center gap-[11px]">
-            <span className="flex h-[34px] w-[34px] items-center justify-center rounded-[10px]" style={{ background: "linear-gradient(150deg,var(--or2),var(--or))" }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns={io}>
-                <path d="M6 13c1.6 0 1.6-2 3.2-2s1.6 2 3.2 2 1.6-2 3.2-2 1.6 2 3.2 2" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" />
-                <circle cx="12" cy="6.4" r="1.5" fill="#fff" />
-              </svg>
-            </span>
-            <span style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: 19, color: "#fff" }}>Zalpan</span>
+          <div className="flex items-center">
+            <ZalpanLogo tagline style={{ height: 36, width: "auto", color: "#fff" }} />
           </div>
           <div style={{ fontSize: 13, color: "#8A8072" }}>
             A{" "}

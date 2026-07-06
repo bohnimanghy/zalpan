@@ -284,7 +284,7 @@ export default function ZalpanPage() {
         <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between gap-6 px-[18px] md:px-10">
           <div className="flex shrink-0 items-center gap-3">
             <a href="#top" className="flex items-center no-underline" aria-label="Zalpan — home">
-              <ZalpanLogo style={{ height: 34, width: "auto", color: "#1f2a37" }} />
+              <ZalpanLogo style={{ height: 41, width: "auto", color: "#1f2a37" }} />
             </a>
             <span className="hidden h-6 w-px bg-[var(--zline)] sm:block" aria-hidden />
             <a href="https://bohniman.ai" target="_blank" rel="noopener noreferrer" className="hidden items-center no-underline transition-colors hover:text-[var(--or)] sm:inline-flex" style={{ fontSize: 12.5, fontWeight: 500, color: "#6E6558" }}>
@@ -785,7 +785,7 @@ export default function ZalpanPage() {
       <footer style={{ background: "var(--charcoal)", color: "#B5AC9E", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-6 px-[18px] py-11 md:px-10">
           <div className="flex items-center">
-            <ZalpanLogo tagline style={{ height: 40, width: "auto", color: "#fff" }} />
+            <ZalpanLogo tagline style={{ height: 43, width: "auto", color: "#fff" }} />
           </div>
           <div style={{ fontSize: 13, color: "#8A8072" }}>
             By{" "}

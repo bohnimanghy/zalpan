@@ -282,26 +282,29 @@ export default function ZalpanPage() {
         }}
       >
         <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between gap-6 px-[18px] md:px-10">
-          <a href="#top" className="flex shrink-0 items-center no-underline" aria-label="Zalpan — home">
-            <ZalpanLogo style={{ height: 22, width: "auto", color: "#1f2a37" }} />
-          </a>
-          <nav className="hidden items-center gap-[30px] md:flex">
-            {[
-              ["Platform", "#platform"],
-              ["Features", "#platform"],
-              ["AI", "#ai"],
-              ["Pricing", "#pricing"],
-              ["Demo", "#demo"],
-            ].map(([label, href], i) => (
-              <a key={i} href={href} className="no-underline transition-colors hover:text-[var(--or)]" style={{ fontSize: 14.5, color: "#4A4237", fontWeight: 500 }}>
-                {label}
-              </a>
-            ))}
-          </nav>
           <div className="flex shrink-0 items-center gap-3">
-            <a href="https://bohniman.com" className="inline-flex items-center gap-[7px] no-underline transition-colors hover:text-[var(--or)]" style={{ fontSize: 13.5, fontWeight: 500, color: "#6E6558" }}>
-              <span style={{ fontFamily: MONO }}>&larr;</span> Bohniman
+            <a href="#top" className="flex items-center no-underline" aria-label="Zalpan — home">
+              <ZalpanLogo style={{ height: 34, width: "auto", color: "#1f2a37" }} />
             </a>
+            <span className="hidden h-6 w-px bg-[var(--zline)] sm:block" aria-hidden />
+            <a href="https://bohniman.ai" target="_blank" rel="noopener noreferrer" className="hidden items-center no-underline transition-colors hover:text-[var(--or)] sm:inline-flex" style={{ fontSize: 12.5, fontWeight: 500, color: "#6E6558" }}>
+              By Bohniman Systems
+            </a>
+          </div>
+          <div className="flex items-center gap-[30px]">
+            <nav className="hidden items-center gap-[30px] md:flex">
+              {[
+                ["Platform", "#platform"],
+                ["Features", "#platform"],
+                ["AI", "#ai"],
+                ["Pricing", "#pricing"],
+                ["Demo", "#demo"],
+              ].map(([label, href], i) => (
+                <a key={i} href={href} className="no-underline transition-colors hover:text-[var(--or)]" style={{ fontSize: 14.5, color: "#4A4237", fontWeight: 500 }}>
+                  {label}
+                </a>
+              ))}
+            </nav>
             <a href="#demo" className="rounded-[9px] px-[18px] py-[11px] font-semibold text-white no-underline transition-transform hover:-translate-y-px" style={{ fontSize: 14, background: "var(--zink)" }}>
               Start Free Trial
             </a>
@@ -782,14 +785,14 @@ export default function ZalpanPage() {
       <footer style={{ background: "var(--charcoal)", color: "#B5AC9E", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-6 px-[18px] py-11 md:px-10">
           <div className="flex items-center">
-            <ZalpanLogo tagline style={{ height: 36, width: "auto", color: "#fff" }} />
+            <ZalpanLogo tagline style={{ height: 40, width: "auto", color: "#fff" }} />
           </div>
           <div style={{ fontSize: 13, color: "#8A8072" }}>
-            A{" "}
-            <a href="https://bohniman.com" className="no-underline" style={{ color: "var(--or2)", fontWeight: 600 }}>
-              Bohniman
+            By{" "}
+            <a href="https://bohniman.ai" target="_blank" rel="noopener noreferrer" className="no-underline" style={{ color: "var(--or2)", fontWeight: 600 }}>
+              Bohniman Systems
             </a>{" "}
-            product · Restaurant Operating System
+            · Restaurant Operating System
           </div>
         </div>
       </footer>

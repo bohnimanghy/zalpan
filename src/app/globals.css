@@ -67,6 +67,17 @@ body {
     transform: translateY(-22px);
   }
 }
+@keyframes zGround {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 0.28;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(0.86);
+    opacity: 0.18;
+  }
+}
 @keyframes zPulse {
   0%,
   100% {

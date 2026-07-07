@@ -2,6 +2,7 @@ import QRCode from "qrcode";
 import { Reveal } from "@/components/Reveal";
 import { ZalpanTour } from "@/components/ZalpanTour";
 import { ZalpanLogo } from "@/components/ZalpanLogo";
+import { AiStack } from "@/components/AiStack";
 
 const DISPLAY = "var(--font-bricolage), 'Bricolage Grotesque', sans-serif";
 const MONO = "var(--font-plex-mono), 'IBM Plex Mono', monospace";
@@ -125,12 +126,6 @@ const aiFeatures = [
   "Rush-hour prediction",
 ];
 
-const aiCards = [
-  { tag: "Forecast", body: "Saturday dinner will spike ~18%. Prep 12 kg extra paneer before 6pm." },
-  { tag: "Inventory", body: "Tomatoes trending low — reorder 20 kg before Thursday service." },
-  { tag: "Menu", body: "Butter Chicken is your top margin driver this week. Feature it on the QR menu." },
-];
-
 const outcomes = [
   { v: "[X]%", h: "Faster checkout", d: "Move queues quickly during peak hours." },
   { v: "[X]%", h: "Less wastage", d: "Recipe-linked stock cuts over-ordering." },
@@ -192,28 +187,36 @@ const pricing = [
 
 const faqs = [
   {
-    q: "Does Zalpan work offline?",
-    a: "Yes. Billing keeps running locally during an internet outage and syncs automatically once the connection is back.",
+    q: "Does it work for Indian restaurants?",
+    a: "Yes. Zalpan is built for Indian F&B — GST-ready invoicing, UPI and digital payments, regional menu structures, and workflows that match how restaurants here actually run.",
   },
   {
-    q: "Can I use my existing printer and hardware?",
-    a: "Zalpan supports standard thermal printers, cash drawers and Android POS tablets, so most existing counter hardware works out of the box.",
+    q: "Can it run on Android tablets?",
+    a: "Absolutely. The counter POS and kitchen display run on standard Android devices, alongside the web portal and an owner mobile app.",
   },
   {
-    q: "Is it GST compliant?",
-    a: "Yes. Zalpan generates GST-ready invoices with configurable tax slabs and HSN codes.",
+    q: "Does it support QR ordering?",
+    a: "Yes. Guests scan a table QR, browse a live menu, order and pay — orders flow straight into the POS and kitchen with no manual re-entry.",
   },
   {
-    q: "How long does setup take?",
-    a: "Most single outlets go live within a day. Menus, pricing and staff can be imported in bulk to speed things up.",
+    q: "Can it work if the internet is unstable?",
+    a: "Zalpan is designed to keep billing and KOTs running through patchy connectivity, syncing automatically once the connection is back.",
   },
   {
-    q: "Does it support multiple outlets?",
-    a: "Yes. Manage central menus, pricing, inventory and analytics across every branch from one dashboard.",
+    q: "Does it support inventory and purchase orders?",
+    a: "Yes. Recipe-linked inventory updates with every sale, and you can raise purchase orders and manage vendors from the same ledger.",
   },
   {
-    q: "What payment methods are supported?",
-    a: "UPI, cards and digital wallets are supported alongside cash, with reconciliation built into reports.",
+    q: "Can I manage multiple outlets?",
+    a: "Yes. Central menus, pricing, inventory and consolidated analytics let you run many outlets — including cruise vessel kitchens — from one dashboard.",
+  },
+  {
+    q: "Does it include AI forecasting?",
+    a: "AI forecasting for demand, stock, peak hours and menu performance is available on higher plans as your restaurant’s co-pilot.",
+  },
+  {
+    q: "Can it integrate with payment systems?",
+    a: "Yes. Zalpan supports UPI and major digital payment methods, and can integrate with payment and third-party systems for enterprise setups.",
   },
 ];
 
@@ -485,11 +488,88 @@ export default function ZalpanPage() {
         </Reveal>
       </section>
 
+      {/* ============ THE PROMISE ============ */}
+      <section style={{ position: "relative", overflow: "hidden", background: "#F6EFDF", backgroundImage: "linear-gradient(90deg,rgba(25,21,18,0.05) 1px,transparent 1px),linear-gradient(rgba(25,21,18,0.05) 1px,transparent 1px)", backgroundSize: "72px 72px", borderTop: "1px solid var(--zline)", borderBottom: "1px solid var(--zline)" }}>
+        <div className="mx-auto max-w-[1280px]" style={{ padding: "clamp(60px,8vw,104px) clamp(18px,4vw,40px)" }}>
+          <div className="grid items-center gap-[clamp(36px,5vw,64px)]" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))" }}>
+          {/* USP text */}
+          <div>
+            <Reveal>
+              <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--or)", marginBottom: 24 }}>02 / The promise</div>
+            </Reveal>
+            <Reveal>
+              <h2 className="m-0" style={{ fontFamily: DISPLAY, fontWeight: 800, lineHeight: 0.92, letterSpacing: "-0.01em", margin: "0 0 26px", color: "var(--zink)" }}>
+                <span style={{ display: "block", fontSize: "clamp(30px,4.4vw,58px)" }}>Run your</span>
+                <span style={{ display: "block", fontSize: "clamp(46px,7.4vw,104px)", color: "var(--or)" }}>ENTIRE</span>
+                <span style={{ display: "block", fontSize: "clamp(30px,4.4vw,58px)" }}>restaurant from</span>
+                <span style={{ display: "inline-block", fontSize: "clamp(46px,7.4vw,104px)", background: "linear-gradient(150deg,var(--or2),var(--or))", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>ONE</span>
+                <span style={{ fontSize: "clamp(30px,4.4vw,58px)" }}> platform.</span>
+              </h2>
+            </Reveal>
+            <Reveal>
+              <p className="m-0" style={{ fontSize: "clamp(15px,1.5vw,18px)", lineHeight: 1.6, color: "var(--zmuted)", margin: "0 0 28px", maxWidth: "44ch" }}>
+                No more juggling six disconnected apps. Billing, kitchen, stock, ordering, CRM and AI — under one roof, in perfect sync.
+              </p>
+            </Reveal>
+            <Reveal className="flex flex-wrap gap-[10px]">
+              <span style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: 14, padding: "8px 16px", borderRadius: 100, background: "var(--zink)", color: "#fff" }}>1 login</span>
+              <span style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: 14, padding: "8px 16px", borderRadius: 100, background: "rgba(240,83,28,0.1)", color: "#B8431A", border: "1px solid rgba(240,83,28,0.24)" }}>8 modules</span>
+              <span style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: 14, padding: "8px 16px", borderRadius: 100, background: "rgba(63,122,85,0.12)", color: "var(--green)", border: "1px solid rgba(63,122,85,0.28)" }}>0 spreadsheets</span>
+            </Reveal>
+          </div>
+
+          {/* claymorphic chef's toque */}
+          <Reveal className="relative flex items-center justify-center" style={{ minHeight: "clamp(320px,34vw,420px)" }}>
+            {/* soft ground shadow */}
+            <div aria-hidden style={{ position: "absolute", left: "50%", bottom: "8%", width: "56%", height: 34, borderRadius: "50%", background: "radial-gradient(ellipse at center,rgba(122,90,46,0.4),transparent 70%)", filter: "blur(9px)", animation: "zGround 7s ease-in-out infinite" }} />
+            {/* accent capsule (top-left) */}
+            <svg aria-hidden viewBox="0 0 120 60" style={{ position: "absolute", top: "6%", left: "2%", width: "clamp(70px,9vw,118px)", transform: "rotate(-24deg)", animation: "zFloat 8.5s ease-in-out infinite", filter: "drop-shadow(0 12px 14px rgba(122,90,46,0.24))" }}>
+              <defs><linearGradient id="promiseCapG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#EAD7B2" /><stop offset="1" stopColor="#C7AC7E" /></linearGradient></defs>
+              <rect x="6" y="14" width="108" height="32" rx="16" fill="url(#promiseCapG)" />
+              <ellipse cx="30" cy="24" rx="16" ry="7" fill="#F7EEDC" opacity="0.5" />
+            </svg>
+            {/* accent sphere (bottom-right) */}
+            <svg aria-hidden viewBox="0 0 80 80" style={{ position: "absolute", bottom: "14%", right: "3%", width: "clamp(48px,6.5vw,80px)", animation: "zFloat2 10s ease-in-out infinite", filter: "drop-shadow(0 14px 16px rgba(122,90,46,0.26))" }}>
+              <defs><radialGradient id="promiseSphG" cx="36%" cy="30%" r="72%"><stop offset="0" stopColor="#FBF4E4" /><stop offset="55%" stopColor="#E6D2AC" /><stop offset="100%" stopColor="#C2A576" /></radialGradient></defs>
+              <circle cx="40" cy="40" r="34" fill="url(#promiseSphG)" />
+              <ellipse cx="30" cy="28" rx="12" ry="8" fill="#fff" opacity="0.4" />
+            </svg>
+            {/* the toque */}
+            <svg aria-hidden viewBox="0 0 340 360" style={{ position: "relative", width: "clamp(230px,27vw,340px)", animation: "zFloat2 9s ease-in-out infinite", overflow: "visible" }}>
+              <defs>
+                <radialGradient id="promiseClayPuff" cx="38%" cy="28%" r="78%"><stop offset="0" stopColor="#FBF4E4" /><stop offset="46%" stopColor="#EBD8B3" /><stop offset="100%" stopColor="#CBAF83" /></radialGradient>
+                <linearGradient id="promiseClayBand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#E6D3A9" /><stop offset="55%" stopColor="#D6BE90" /><stop offset="100%" stopColor="#BFA277" /></linearGradient>
+                <radialGradient id="promiseClayHi" cx="50%" cy="50%" r="50%"><stop offset="0" stopColor="#ffffff" stopOpacity="0.55" /><stop offset="100%" stopColor="#ffffff" stopOpacity="0" /></radialGradient>
+                <filter id="promiseClaySoft" x="-30%" y="-20%" width="160%" height="150%"><feDropShadow dx="0" dy="20" stdDeviation="18" floodColor="#7A5A2E" floodOpacity="0.24" /></filter>
+              </defs>
+              <g filter="url(#promiseClaySoft)">
+                {/* connector neck */}
+                <rect x="100" y="150" width="140" height="96" rx="42" fill="url(#promiseClayPuff)" />
+                {/* band */}
+                <rect x="92" y="216" width="156" height="78" rx="19" fill="url(#promiseClayBand)" />
+                <line x1="120" y1="228" x2="120" y2="282" stroke="#B69A6C" strokeWidth="2" strokeLinecap="round" opacity="0.32" />
+                <line x1="147" y1="228" x2="147" y2="282" stroke="#B69A6C" strokeWidth="2" strokeLinecap="round" opacity="0.32" />
+                <line x1="174" y1="228" x2="174" y2="282" stroke="#B69A6C" strokeWidth="2" strokeLinecap="round" opacity="0.32" />
+                <line x1="201" y1="228" x2="201" y2="282" stroke="#B69A6C" strokeWidth="2" strokeLinecap="round" opacity="0.32" />
+                <line x1="228" y1="228" x2="228" y2="282" stroke="#B69A6C" strokeWidth="2" strokeLinecap="round" opacity="0.32" />
+                {/* crown puffs */}
+                <circle cx="110" cy="152" r="58" fill="url(#promiseClayPuff)" />
+                <circle cx="230" cy="152" r="58" fill="url(#promiseClayPuff)" />
+                <circle cx="170" cy="110" r="78" fill="url(#promiseClayPuff)" />
+                {/* highlight */}
+                <ellipse cx="146" cy="82" rx="40" ry="26" fill="url(#promiseClayHi)" />
+              </g>
+            </svg>
+          </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* ============ PLATFORM ============ */}
       <section id="platform" style={{ background: "var(--charcoal)", color: "#F3ECDF", backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px)", backgroundSize: "64px 64px" }}>
         <div className="mx-auto max-w-[1280px] px-[18px] py-[clamp(64px,8vw,110px)] md:px-10">
           <Reveal className="mb-[56px] max-w-[720px]">
-            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or2)", marginBottom: 18 }}>02 / The platform</div>
+            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or2)", marginBottom: 18 }}>03 / The platform</div>
             <h2 className="m-0 text-balance" style={{ fontFamily: DISPLAY, fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.03, color: "#fff" }}>
               One platform. Complete restaurant control.
             </h2>
@@ -510,7 +590,7 @@ export default function ZalpanPage() {
       {/* ============ CONNECTED WORKFLOW ============ */}
       <section className="mx-auto max-w-[1280px] px-[18px] py-[clamp(64px,8vw,110px)] md:px-10">
         <Reveal className="mb-[60px] max-w-[800px]">
-          <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>03 / Connected workflow</div>
+          <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>04 / Connected workflow</div>
           <h2 className="m-0 text-balance" style={{ fontFamily: DISPLAY, fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.05 }}>
             From guest order to kitchen to billing to analytics — everything stays in sync.
           </h2>
@@ -530,9 +610,9 @@ export default function ZalpanPage() {
       <section id="tour" style={{ background: "#F3EBDB", borderBlock: "1px solid var(--zline)" }}>
         <div className="mx-auto max-w-[1280px] px-[18px] py-[clamp(64px,8vw,110px)] md:px-10">
           <Reveal className="mb-[44px] max-w-[720px]">
-            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>04 / Product tour</div>
+            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>05 / Product tour</div>
             <h2 className="m-0 text-balance" style={{ fontFamily: DISPLAY, fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.05 }}>
-              See how it works during a real rush hour.
+              See how it works during a real <span style={{ color: "var(--or)" }}>rush hour.</span>
             </h2>
           </Reveal>
           <ZalpanTour />
@@ -543,7 +623,7 @@ export default function ZalpanPage() {
       <section id="ai" className="mx-auto max-w-[1280px] px-[18px] py-[clamp(64px,8vw,110px)] md:px-10">
         <div className="grid grid-cols-1 items-center gap-[clamp(40px,5vw,72px)] md:grid-cols-2">
           <Reveal>
-            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>05 / AI co-pilot</div>
+            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>06 / AI co-pilot</div>
             <h2 className="m-0 mb-5 text-balance" style={{ fontFamily: DISPLAY, fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.02 }}>
               Meet your restaurant AI co-pilot.
             </h2>
@@ -562,18 +642,8 @@ export default function ZalpanPage() {
           </Reveal>
           <Reveal className="relative min-h-[340px]">
             <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 60% 40%,rgba(240,83,28,0.12),transparent 65%)" }} />
-            <div className="relative flex flex-col gap-[14px]">
-              {aiCards.map((c) => (
-                <div key={c.tag} className="rounded-[14px] p-[18px]" style={{ background: "var(--paper)", border: "1px solid var(--zline)", boxShadow: "0 20px 44px -30px rgba(25,21,18,0.4)" }}>
-                  <div className="mb-2 flex items-center gap-[9px]">
-                    <span className="inline-flex h-[26px] w-[26px] items-center justify-center rounded-[7px]" style={{ background: "linear-gradient(150deg,var(--or2),var(--or))" }}>
-                      <span style={{ color: "#fff", fontSize: 13, fontWeight: 800 }}>✦</span>
-                    </span>
-                    <span style={{ fontFamily: MONO, fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--or)" }}>{c.tag}</span>
-                  </div>
-                  <div style={{ fontSize: 14.5, lineHeight: 1.55, color: "var(--zink)" }}>{c.body}</div>
-                </div>
-              ))}
+            <div className="relative">
+              <AiStack />
             </div>
           </Reveal>
         </div>
@@ -583,7 +653,7 @@ export default function ZalpanPage() {
       <section style={{ background: "var(--charcoal)", color: "#F3ECDF" }}>
         <div className="mx-auto max-w-[1280px] px-[18px] py-[clamp(64px,8vw,110px)] md:px-10">
           <Reveal className="mb-[52px] max-w-[680px]">
-            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or2)", marginBottom: 18 }}>06 / Outcomes</div>
+            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or2)", marginBottom: 18 }}>07 / Outcomes</div>
             <h2 className="m-0 text-balance" style={{ fontFamily: DISPLAY, fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.03, color: "#fff" }}>
               Outcomes restaurant owners actually care about.
             </h2>
@@ -607,7 +677,7 @@ export default function ZalpanPage() {
       {/* ============ USE CASES ============ */}
       <section className="mx-auto max-w-[1280px] px-[18px] py-[clamp(64px,8vw,110px)] md:px-10">
         <Reveal className="mb-[52px] max-w-[680px]">
-          <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>07 / Use cases</div>
+          <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>08 / Use cases</div>
           <h2 className="m-0 text-balance" style={{ fontFamily: DISPLAY, fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.03 }}>
             Built for every restaurant format.
           </h2>
@@ -627,7 +697,7 @@ export default function ZalpanPage() {
       <section style={{ background: "#F3EBDB", borderBlock: "1px solid var(--zline)" }}>
         <div className="mx-auto max-w-[1280px] px-[18px] py-[clamp(64px,8vw,110px)] md:px-10">
           <Reveal className="mb-[52px] max-w-[680px]">
-            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>08 / Anywhere</div>
+            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>09 / Anywhere</div>
             <h2 className="m-0 mb-4 text-balance" style={{ fontFamily: DISPLAY, fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.03 }}>
               Run it anywhere.
             </h2>
@@ -638,14 +708,58 @@ export default function ZalpanPage() {
           </Reveal>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { t: "Android POS tablet", d: "Counter billing" },
-              { t: "Kitchen display", d: "Live KOTs" },
-              { t: "Owner mobile app", d: "Dashboard on the go" },
-              { t: "Web admin portal", d: "Full management" },
+              {
+                t: "Android POS tablet",
+                d: "Counter billing",
+                icon: (
+                  <svg width="60" height="46" viewBox="0 0 46 34" fill="none">
+                    <rect x="1.5" y="1.5" width="43" height="31" rx="4.5" stroke="var(--zink)" strokeWidth="2" />
+                    <rect x="6" y="6" width="30" height="22" rx="2" fill="rgba(240,83,28,0.16)" />
+                    <circle cx="40" cy="17" r="1.6" fill="var(--zink)" />
+                  </svg>
+                ),
+              },
+              {
+                t: "Kitchen display",
+                d: "Live KOTs",
+                icon: (
+                  <svg width="52" height="50" viewBox="0 0 44 42" fill="none">
+                    <rect x="2" y="2" width="40" height="27" rx="3.5" stroke="var(--zink)" strokeWidth="2" />
+                    <rect x="6.5" y="6.5" width="31" height="18" rx="1.5" fill="rgba(240,83,28,0.16)" />
+                    <path d="M22 29 V35 M14 39 H30" stroke="var(--zink)" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                ),
+              },
+              {
+                t: "Owner mobile app",
+                d: "Dashboard on the go",
+                icon: (
+                  <svg width="34" height="50" viewBox="0 0 28 44" fill="none">
+                    <rect x="2.5" y="1.5" width="23" height="41" rx="5" stroke="var(--zink)" strokeWidth="2" />
+                    <rect x="6" y="8" width="16" height="24" rx="1.5" fill="rgba(240,83,28,0.16)" />
+                    <line x1="11" y1="5" x2="17" y2="5" stroke="var(--zink)" strokeWidth="2" strokeLinecap="round" />
+                    <circle cx="14" cy="37.5" r="1.6" fill="var(--zink)" />
+                  </svg>
+                ),
+              },
+              {
+                t: "Web admin portal",
+                d: "Full management",
+                icon: (
+                  <svg width="60" height="46" viewBox="0 0 46 34" fill="none">
+                    <rect x="1.5" y="2.5" width="43" height="29" rx="4" stroke="var(--zink)" strokeWidth="2" />
+                    <line x1="1.5" y1="10.5" x2="44.5" y2="10.5" stroke="var(--zink)" strokeWidth="2" />
+                    <circle cx="6.5" cy="6.5" r="1.3" fill="var(--zink)" />
+                    <circle cx="11" cy="6.5" r="1.3" fill="var(--zink)" />
+                    <circle cx="15.5" cy="6.5" r="1.3" fill="var(--zink)" />
+                    <rect x="6" y="15" width="34" height="12" rx="2" fill="rgba(240,83,28,0.16)" />
+                  </svg>
+                ),
+              },
             ].map((dv) => (
               <div key={dv.t} className="rounded-[16px] p-[28px] text-center" style={{ background: "var(--paper)", border: "1px solid var(--zline)" }}>
-                <div className="mx-auto mb-[18px] flex h-[52px] w-[70px] items-center justify-center rounded-[8px]" style={{ border: "2px solid var(--zink)" }}>
-                  <div className="h-full w-full rounded-[3px]" style={{ inset: 6, background: "rgba(240,83,28,0.14)", margin: 6 }} />
+                <div className="mx-auto mb-[18px] flex h-[52px] items-center justify-center">
+                  {dv.icon}
                 </div>
                 <div style={{ fontWeight: 700, fontSize: 15 }}>{dv.t}</div>
                 <div className="mt-[5px]" style={{ fontSize: 12.5, color: "var(--zmuted)" }}>{dv.d}</div>
@@ -658,7 +772,7 @@ export default function ZalpanPage() {
       {/* ============ COMPARISON ============ */}
       <section className="mx-auto max-w-[1080px] px-[18px] py-[clamp(64px,8vw,110px)] md:px-10">
         <Reveal className="mb-[44px] max-w-[680px]">
-          <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>09 / Comparison</div>
+          <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>10 / Comparison</div>
           <h2 className="m-0 text-balance" style={{ fontFamily: DISPLAY, fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.03 }}>
             More than a traditional POS.
           </h2>

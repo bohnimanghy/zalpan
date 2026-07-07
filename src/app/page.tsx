@@ -902,11 +902,10 @@ export default function ZalpanPage() {
             <ZalpanLogo tagline style={{ height: 43, width: "auto", color: "#fff" }} />
           </div>
           <div style={{ fontSize: 13, color: "#8A8072" }}>
-            By{" "}
+            © 2026{" "}
             <a href="https://bohniman.ai" target="_blank" rel="noopener noreferrer" className="no-underline" style={{ color: "var(--or2)", fontWeight: 600 }}>
               Bohniman Systems
-            </a>{" "}
-            · Restaurant Operating System
+            </a>
           </div>
         </div>
       </footer>

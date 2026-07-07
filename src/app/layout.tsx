@@ -5,6 +5,7 @@ import {
   IBM_Plex_Mono,
 } from "next/font/google";
 import "./globals.css";
+import { ScrollTop } from "@/components/ScrollTop";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -50,7 +51,10 @@ export default function RootLayout({
       lang="en"
       className={`${bricolage.variable} ${plexSans.variable} ${plexMono.variable} h-full`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        {children}
+        <ScrollTop />
+      </body>
     </html>
   );
 }

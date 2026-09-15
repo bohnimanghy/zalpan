@@ -3,6 +3,7 @@ import { Reveal } from "@/components/Reveal";
 import { ZalpanTour } from "@/components/ZalpanTour";
 import { ZalpanLogo } from "@/components/ZalpanLogo";
 import { AiStack } from "@/components/AiStack";
+import { PricingPlans } from "@/components/PricingPlans";
 
 const DISPLAY = "var(--font-bricolage), 'Bricolage Grotesque', sans-serif";
 const MONO = "var(--font-plex-mono), 'IBM Plex Mono', monospace";
@@ -153,37 +154,6 @@ const comparison = [
   ["AI forecasting", false, true],
   ["Real-time analytics", "Basic", true],
 ] as const;
-
-const pricing = [
-  {
-    name: "Starter",
-    blurb: "Small cafés and single-outlet restaurants.",
-    feats: ["POS & billing", "GST invoices & UPI", "Basic reports"],
-    featured: false,
-  },
-  {
-    name: "Growth",
-    blurb: "Restaurants adding inventory, kitchen, QR & CRM.",
-    feats: [
-      "Everything in Starter",
-      "Kitchen display & QR ordering",
-      "Inventory & CRM",
-      "Vendor purchase orders",
-    ],
-    featured: true,
-  },
-  {
-    name: "Enterprise",
-    blurb: "Multi-outlet chains & cruise vessel kitchens.",
-    feats: [
-      "Everything in Growth",
-      "Advanced analytics",
-      "AI forecasting",
-      "Custom integrations",
-    ],
-    featured: false,
-  },
-];
 
 const faqs = [
   {
@@ -819,35 +789,13 @@ export default function ZalpanPage() {
 
       {/* ============ PRICING ============ */}
       <section id="pricing" className="mx-auto max-w-[1280px] px-[18px] py-[clamp(64px,8vw,110px)] md:px-10">
-        <Reveal className="mx-auto mb-[56px] max-w-[640px] text-center">
+        <Reveal className="mx-auto mb-[32px] max-w-[640px] text-center">
           <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>10 / Pricing</div>
           <h2 className="m-0 text-balance" style={{ fontFamily: DISPLAY, fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.03 }}>
             Plans that grow with you.
           </h2>
         </Reveal>
-        <div className="grid grid-cols-1 items-start gap-[18px] md:grid-cols-3">
-          {pricing.map((p) => (
-            <div key={p.name} className="relative rounded-[20px] p-[32px]" style={p.featured ? { background: "var(--charcoal)", color: "#fff", border: "1px solid var(--charcoal)", boxShadow: "0 30px 60px -30px rgba(25,21,18,0.5)" } : { background: "var(--paper)", border: "1px solid var(--zline)" }}>
-              {p.featured && (
-                <div className="absolute right-[22px] top-[22px] rounded-full px-[11px] py-[5px]" style={{ fontFamily: MONO, fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", background: "var(--or)" }}>Most popular</div>
-              )}
-              <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", color: p.featured ? "var(--or2)" : "var(--zmuted)", marginBottom: 12 }}>{p.name}</div>
-              <div className="mb-[6px]" style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: 32, letterSpacing: "-0.02em" }}>Let&rsquo;s talk</div>
-              <div className="mb-6" style={{ fontSize: 13.5, color: p.featured ? "#B5AC9E" : "var(--zmuted)", lineHeight: 1.5 }}>{p.blurb}</div>
-              <div className="mb-7 flex flex-col gap-[11px]">
-                {p.feats.map((f) => (
-                  <div key={f} className="flex gap-[9px]" style={{ fontSize: 14, color: p.featured ? "#E7DDC9" : "#4A4237" }}>
-                    <span style={{ color: p.featured ? "var(--or2)" : "var(--green)", fontWeight: 700 }}>✓</span>
-                    {f}
-                  </div>
-                ))}
-              </div>
-              <a href="#demo" className="block rounded-[11px] py-[13px] text-center font-semibold transition-transform hover:-translate-y-[2px]" style={p.featured ? { background: "var(--or)", color: "#fff", fontSize: 14.5 } : { border: "1px solid var(--zink)", color: "var(--zink)", fontSize: 14.5 }}>
-                Talk to Sales
-              </a>
-            </div>
-          ))}
-        </div>
+        <PricingPlans />
       </section>
 
       {/* ============ FAQ ============ */}

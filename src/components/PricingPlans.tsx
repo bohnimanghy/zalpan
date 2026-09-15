@@ -85,23 +85,6 @@ const plans: Plan[] = [
 export function PricingPlans() {
   return (
     <>
-      <Reveal className="mb-[32px] flex justify-center">
-        <div
-          className="rounded-full px-[14px] py-[6px]"
-          style={{
-            fontFamily: MONO,
-            fontSize: 11,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "var(--or)",
-            background: "rgba(240,83,28,0.1)",
-            border: "1px solid rgba(240,83,28,0.24)",
-          }}
-        >
-          First month free on enrollment
-        </div>
-      </Reveal>
-
       <div className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 xl:grid-cols-4">
         {plans.map((p, i) => (
           <Reveal key={`${p.name}-${p.deploy ?? "talk"}`} delay={i * 0.06}>
@@ -179,7 +162,7 @@ export function PricingPlans() {
       </div>
 
       <Reveal className="mt-[28px] text-center" style={{ fontFamily: MONO, fontSize: 12, color: "var(--zmuted)", letterSpacing: "0.02em" }}>
-        All prices exclude GST. Billed yearly. First month free when you enroll.
+        All prices exclude GST. Billed yearly.
       </Reveal>
     </>
   );

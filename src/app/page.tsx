@@ -815,7 +815,7 @@ export default function ZalpanPage() {
 
       {/* ============ PRICING ============ */}
       <section id="pricing" className="mx-auto max-w-[1280px] px-[18px] py-[clamp(64px,8vw,110px)] md:px-10">
-        <Reveal className="mx-auto mb-[32px] max-w-[640px] text-center">
+        <Reveal className="mx-auto mb-[56px] max-w-[640px] text-center">
           <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--or)", marginBottom: 18 }}>10 / Pricing</div>
           <h2 className="m-0 text-balance" style={{ fontFamily: DISPLAY, fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(30px,4vw,52px)", lineHeight: 1.03 }}>
             Plans that grow with you.

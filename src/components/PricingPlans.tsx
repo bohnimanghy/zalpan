@@ -42,7 +42,7 @@ const plans: Plan[] = [
   },
   {
     name: "Lite",
-    blurb: "Same Lite, fully hosted — no server at the outlet.",
+    blurb: "Same Lite, fully hosted — no server at the outlet. 1 user included.",
     price: { mo: 699, yr: 7689 },
     priceNote: "cloud",
     feats: [

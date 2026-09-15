@@ -15,14 +15,14 @@ type Plan = {
   /** primary price; undefined = "Let's talk" */
   price?: Price;
   priceNote?: string;
-  /** optional second deployment price */
-  alt?: { label: string; price: Price };
   feats: string[];
   addons: string[];
   featured: boolean;
 };
 
 const inr = (n: number) => "₹" + n.toLocaleString("en-IN");
+/** list price before launch discount (current = list ÷ 1.5) */
+const list = (n: number) => Math.round(n * 1.5);
 
 const plans: Plan[] = [
   {
@@ -30,15 +30,29 @@ const plans: Plan[] = [
     blurb: "Single-outlet cafés and restaurants. 1 user included.",
     price: { mo: 499, yr: 5489 },
     priceNote: "on-premise",
-    alt: { label: "Cloud", price: { mo: 699, yr: 7689 } },
     feats: [
       "POS & billing",
       "GST invoices & UPI",
       "Basic reports",
-      "Cloud dashboard included with on-premise",
+      "Cloud dashboard included",
       "Runs up to 7 days offline",
     ],
-    addons: ["Extra users +₹499/user/yr (on-premise)", "Extra users +₹450/user/yr (cloud)"],
+    addons: ["Extra users +₹499/user/yr"],
+    featured: false,
+  },
+  {
+    name: "Lite",
+    blurb: "Same Lite, fully hosted — no server at the outlet.",
+    price: { mo: 699, yr: 7689 },
+    priceNote: "cloud",
+    feats: [
+      "POS & billing",
+      "GST invoices & UPI",
+      "Basic reports",
+      "Hosted & backed up by us",
+      "Access from anywhere",
+    ],
+    addons: ["Extra users +₹450/user/yr"],
     featured: false,
   },
   {
@@ -124,11 +138,11 @@ export function PricingPlans() {
         </div>
       </Reveal>
 
-      <div className="grid grid-cols-1 items-start gap-[18px] md:grid-cols-3">
+      <div className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 xl:grid-cols-4">
         {plans.map((p, i) => (
-          <Reveal key={p.name} delay={i * 0.06}>
+          <Reveal key={`${p.name}-${p.priceNote ?? "talk"}`} delay={i * 0.06}>
             <TiltCard
-              className="relative rounded-[20px] p-[32px]"
+              className="relative rounded-[20px] p-[28px]"
               style={
                 p.featured
                   ? { background: "var(--charcoal)", color: "#fff", border: "1px solid var(--charcoal)", boxShadow: "0 30px 60px -30px rgba(25,21,18,0.5)" }
@@ -136,30 +150,32 @@ export function PricingPlans() {
               }
             >
               {p.featured && (
-                <div className="absolute right-[22px] top-[22px] rounded-full px-[11px] py-[5px]" style={{ fontFamily: MONO, fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", background: "var(--or)" }}>
+                <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full px-[12px] py-[5px]" style={{ fontFamily: MONO, fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", background: "var(--or)" }}>
                   Most popular
                 </div>
               )}
-              <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", color: p.featured ? "var(--or2)" : "var(--zmuted)", marginBottom: 12 }}>
-                Zalpan {p.name}
+              <div className="mb-[12px] flex flex-wrap items-center gap-[8px]">
+                <span style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", color: p.featured ? "var(--or2)" : "var(--zmuted)" }}>
+                  Zalpan {p.name}
+                </span>
+                {p.priceNote && (
+                  <span className="rounded-full px-[8px] py-[2px]" style={{ fontFamily: MONO, fontSize: 9.5, letterSpacing: "0.1em", textTransform: "uppercase", color: p.featured ? "#E7DDC9" : "var(--zink)", background: p.featured ? "rgba(255,253,248,0.1)" : "#F3EBDB", border: `1px solid ${p.featured ? "rgba(255,255,255,0.12)" : "var(--zline)"}` }}>
+                    {p.priceNote}
+                  </span>
+                )}
               </div>
 
               {p.price ? (
                 <>
-                  <div className="mb-[2px] flex items-baseline gap-[6px]">
+                  <div className="mb-[6px] flex items-center gap-[8px]">
+                    <s style={{ fontFamily: MONO, fontSize: 13, color: p.featured ? "#8A8174" : "#A89E8F", textDecorationColor: "var(--or)" }}>{inr(list(pick(p.price)))}{per}</s>
+                    <span className="whitespace-nowrap rounded-full px-[8px] py-[3px]" style={{ fontFamily: MONO, fontSize: 9.5, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", background: "var(--green)" }}>33% off</span>
+                  </div>
+                  <div className="mb-[10px] flex items-baseline gap-[6px]">
                     <span style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: 36, letterSpacing: "-0.02em", lineHeight: 1 }}>{inr(pick(p.price))}</span>
                     <span style={{ fontFamily: MONO, fontSize: 12.5, color: p.featured ? "#B5AC9E" : "var(--zmuted)" }}>
                       {per}
-                      {p.priceNote ? ` · ${p.priceNote}` : ""}
                     </span>
-                  </div>
-                  <div className="mb-[10px]" style={{ fontFamily: MONO, fontSize: 12.5, color: p.featured ? "#B5AC9E" : "var(--zmuted)", minHeight: 18 }}>
-                    {p.alt && (
-                      <>
-                        {p.alt.label}: <span style={{ color: p.featured ? "#fff" : "var(--zink)", fontWeight: 600 }}>{inr(pick(p.alt.price))}</span>
-                        {per}
-                      </>
-                    )}
                   </div>
                 </>
               ) : (

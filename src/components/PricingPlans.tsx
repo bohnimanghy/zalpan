@@ -27,7 +27,7 @@ const plans: Plan[] = [
   {
     name: "Lite",
     blurb: "Single-outlet cafés and restaurants. 1 user included.",
-    price: 5489,
+    price: 5999,
     deploy: "on-premise",
     feats: [
       "POS & billing",
@@ -42,7 +42,7 @@ const plans: Plan[] = [
   {
     name: "Lite",
     blurb: "Same as Lite, fully hosted — no server at the outlet. 1 user included.",
-    price: 7689,
+    price: 7999,
     deploy: "cloud",
     feats: [
       "POS & billing",

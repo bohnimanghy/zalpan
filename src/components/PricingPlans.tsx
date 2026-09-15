@@ -1,20 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { TiltCard } from "@/components/TiltCard";
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY } from "@/lib/contact";
 
 const DISPLAY = "var(--font-bricolage), 'Bricolage Grotesque', sans-serif";
 const MONO = "var(--font-plex-mono), 'IBM Plex Mono', monospace";
 
-type Price = { mo: number; yr: number };
-
 type Plan = {
   name: string;
   blurb: string;
-  /** primary price; undefined = "Let's talk" */
-  price?: Price;
-  priceNote?: string;
+  /** yearly price in ₹; undefined = "Let's talk" (monthly billing TBD) */
+  price?: number;
+  deploy?: string;
   feats: string[];
   addons: string[];
   featured: boolean;
@@ -24,12 +22,14 @@ const inr = (n: number) => "₹" + n.toLocaleString("en-IN");
 /** list price before launch discount (current = list ÷ 1.5) */
 const list = (n: number) => Math.round(n * 1.5);
 
+const EXTRA_USER = "Extra users +₹499/user/yr";
+
 const plans: Plan[] = [
   {
     name: "Lite",
     blurb: "Single-outlet cafés and restaurants. 1 user included.",
-    price: { mo: 499, yr: 5489 },
-    priceNote: "on-premise",
+    price: 5489,
+    deploy: "on-premise",
     feats: [
       "POS & billing",
       "GST invoices & UPI",
@@ -37,14 +37,14 @@ const plans: Plan[] = [
       "Cloud dashboard included",
       "Runs up to 7 days offline",
     ],
-    addons: ["Extra users +₹499/user/yr"],
+    addons: [EXTRA_USER],
     featured: false,
   },
   {
     name: "Lite",
-    blurb: "Same Lite, fully hosted — no server at the outlet. 1 user included.",
-    price: { mo: 699, yr: 7689 },
-    priceNote: "cloud",
+    blurb: "Same as Lite, fully hosted — no server at the outlet. 1 user included.",
+    price: 7689,
+    deploy: "cloud",
     feats: [
       "POS & billing",
       "GST invoices & UPI",
@@ -52,21 +52,21 @@ const plans: Plan[] = [
       "Hosted & backed up by us",
       "Access from anywhere",
     ],
-    addons: ["Extra users +₹450/user/yr"],
+    addons: [EXTRA_USER],
     featured: false,
   },
   {
     name: "Pro",
     blurb: "Restaurants adding inventory, kitchen, QR & CRM. 5 users included.",
-    price: { mo: 1399, yr: 14999 },
-    priceNote: "on-premise",
+    price: 14999,
+    deploy: "on-premise",
     feats: [
       "Everything in Lite",
       "Kitchen display & QR ordering",
       "Inventory & CRM",
       "Vendor purchase orders",
     ],
-    addons: ["Extra users +₹499/user/yr", "Extra floors +₹2,999/floor/yr"],
+    addons: [EXTRA_USER, "Extra floors +₹2,999/floor/yr"],
     featured: true,
   },
   {
@@ -83,64 +83,34 @@ const plans: Plan[] = [
   },
 ];
 
-export function PricingPlans() {
-  const [yearly, setYearly] = useState(true);
-  const per = yearly ? "/yr" : "/mo";
-  const pick = (p: Price) => (yearly ? p.yr : p.mo);
+const salesContacts = [
+  { label: "Call", value: CONTACT_PHONE_DISPLAY, href: `tel:${CONTACT_PHONE}` },
+  { label: "Email", value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
+];
 
+export function PricingPlans() {
   return (
     <>
-      {/* billing toggle */}
-      <Reveal className="mb-[36px] flex flex-col items-center gap-[10px]">
+      <Reveal className="mb-[32px] flex justify-center">
         <div
-          role="tablist"
-          aria-label="Billing period"
-          className="relative inline-flex rounded-full p-[4px]"
-          style={{ background: "#F3EBDB", border: "1px solid var(--zline)" }}
-        >
-          {(["Monthly", "Yearly"] as const).map((label) => {
-            const active = (label === "Yearly") === yearly;
-            return (
-              <button
-                key={label}
-                role="tab"
-                aria-selected={active}
-                type="button"
-                onClick={() => setYearly(label === "Yearly")}
-                className="relative rounded-full px-[18px] py-[8px]"
-                style={{
-                  fontFamily: DISPLAY,
-                  fontWeight: 600,
-                  fontSize: 14,
-                  color: active ? "#fff" : "var(--zmuted)",
-                  background: active ? "var(--zink)" : "transparent",
-                  transition: "background .25s, color .25s",
-                }}
-              >
-                {label}
-              </button>
-            );
-          })}
-        </div>
-        <div
-          className="rounded-full px-[10px] py-[4px]"
+          className="rounded-full px-[14px] py-[6px]"
           style={{
             fontFamily: MONO,
-            fontSize: 10.5,
-            letterSpacing: "0.1em",
+            fontSize: 11,
+            letterSpacing: "0.12em",
             textTransform: "uppercase",
             color: "var(--or)",
             background: "rgba(240,83,28,0.1)",
             border: "1px solid rgba(240,83,28,0.24)",
           }}
         >
-          Yearly = 1 month free
+          First month free on enrollment
         </div>
       </Reveal>
 
       <div className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 xl:grid-cols-4">
         {plans.map((p, i) => (
-          <Reveal key={`${p.name}-${p.priceNote ?? "talk"}`} delay={i * 0.06}>
+          <Reveal key={`${p.name}-${p.deploy ?? "talk"}`} delay={i * 0.06}>
             <TiltCard
               className="relative rounded-[20px] p-[28px]"
               style={
@@ -158,9 +128,9 @@ export function PricingPlans() {
                 <span style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", color: p.featured ? "var(--or2)" : "var(--zmuted)" }}>
                   Zalpan {p.name}
                 </span>
-                {p.priceNote && (
+                {p.deploy && (
                   <span className="rounded-full px-[8px] py-[2px]" style={{ fontFamily: MONO, fontSize: 9.5, letterSpacing: "0.1em", textTransform: "uppercase", color: p.featured ? "#E7DDC9" : "var(--zink)", background: p.featured ? "rgba(255,253,248,0.1)" : "#F3EBDB", border: `1px solid ${p.featured ? "rgba(255,255,255,0.12)" : "var(--zline)"}` }}>
-                    {p.priceNote}
+                    {p.deploy}
                   </span>
                 )}
               </div>
@@ -168,14 +138,12 @@ export function PricingPlans() {
               {p.price ? (
                 <>
                   <div className="mb-[6px] flex items-center gap-[8px]">
-                    <s style={{ fontFamily: MONO, fontSize: 13, color: p.featured ? "#8A8174" : "#A89E8F", textDecorationColor: "var(--or)" }}>{inr(list(pick(p.price)))}{per}</s>
+                    <s style={{ fontFamily: MONO, fontSize: 13, color: p.featured ? "#8A8174" : "#A89E8F", textDecorationColor: "var(--or)" }}>{inr(list(p.price))}/yr</s>
                     <span className="whitespace-nowrap rounded-full px-[8px] py-[3px]" style={{ fontFamily: MONO, fontSize: 9.5, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", background: "var(--green)" }}>33% off</span>
                   </div>
                   <div className="mb-[10px] flex items-baseline gap-[6px]">
-                    <span style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: 36, letterSpacing: "-0.02em", lineHeight: 1 }}>{inr(pick(p.price))}</span>
-                    <span style={{ fontFamily: MONO, fontSize: 12.5, color: p.featured ? "#B5AC9E" : "var(--zmuted)" }}>
-                      {per}
-                    </span>
+                    <span style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: 36, letterSpacing: "-0.02em", lineHeight: 1 }}>{inr(p.price)}</span>
+                    <span style={{ fontFamily: MONO, fontSize: 12.5, color: p.featured ? "#B5AC9E" : "var(--zmuted)" }}>/yr</span>
                   </div>
                 </>
               ) : (
@@ -204,20 +172,37 @@ export function PricingPlans() {
                 <div className="mb-7" />
               )}
 
-              <a
-                href="#demo"
-                className="block rounded-[11px] py-[13px] text-center font-semibold transition-transform hover:-translate-y-[2px]"
-                style={p.featured ? { background: "var(--or)", color: "#fff", fontSize: 14.5 } : { border: "1px solid var(--zink)", color: "var(--zink)", fontSize: 14.5 }}
-              >
-                {p.price ? "Get started" : "Talk to Sales"}
-              </a>
+              {p.price ? (
+                <a
+                  href="#demo"
+                  className="block rounded-[11px] py-[13px] text-center font-semibold transition-transform hover:-translate-y-[2px]"
+                  style={p.featured ? { background: "var(--or)", color: "#fff", fontSize: 14.5 } : { border: "1px solid var(--zink)", color: "var(--zink)", fontSize: 14.5 }}
+                >
+                  Get started
+                </a>
+              ) : (
+                <div className="flex flex-col gap-[8px]">
+                  <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--or)" }}>Talk to Sales</div>
+                  {salesContacts.map((c) => (
+                    <a
+                      key={c.label}
+                      href={c.href}
+                      className="flex items-center justify-between gap-[10px] rounded-[11px] px-[14px] py-[11px] no-underline transition-transform hover:-translate-y-[2px]"
+                      style={{ border: "1px solid var(--zink)", color: "var(--zink)" }}
+                    >
+                      <span style={{ fontFamily: MONO, fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--zmuted)" }}>{c.label}</span>
+                      <span style={{ fontSize: 13.5, fontWeight: 600, wordBreak: "break-all" }}>{c.value}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
             </TiltCard>
           </Reveal>
         ))}
       </div>
 
       <Reveal className="mt-[28px] text-center" style={{ fontFamily: MONO, fontSize: 12, color: "var(--zmuted)", letterSpacing: "0.02em" }}>
-        All prices exclude GST. Yearly plans are billed as 11 months — one month free.
+        All prices exclude GST. Billed yearly. First month free when you enroll.
       </Reveal>
     </>
   );

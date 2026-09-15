@@ -4,6 +4,7 @@ import { ZalpanTour } from "@/components/ZalpanTour";
 import { ZalpanLogo } from "@/components/ZalpanLogo";
 import { AiStack } from "@/components/AiStack";
 import { PricingPlans } from "@/components/PricingPlans";
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY } from "@/lib/contact";
 
 const DISPLAY = "var(--font-bricolage), 'Bricolage Grotesque', sans-serif";
 const MONO = "var(--font-plex-mono), 'IBM Plex Mono', monospace";
@@ -22,7 +23,6 @@ const zVars = {
 
 const io = "http://www.w3.org/2000/svg";
 
-const CONTACT_EMAIL = "hello@bohniman.com";
 const DEMO_MAILTO =
   `mailto:${CONTACT_EMAIL}?subject=` +
   encodeURIComponent("Zalpan demo request") +
@@ -45,6 +45,16 @@ const DEMO_MAILTO =
 
 /** Ways to reach the team. Add phone / form entries here when ready. */
 const contactWays = [
+  {
+    label: "Call us",
+    value: CONTACT_PHONE_DISPLAY,
+    href: `tel:${CONTACT_PHONE}`,
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns={io}>
+        <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
   {
     label: "Email us",
     value: CONTACT_EMAIL,

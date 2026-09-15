@@ -23,26 +23,6 @@ const zVars = {
 
 const io = "http://www.w3.org/2000/svg";
 
-const DEMO_MAILTO =
-  `mailto:${CONTACT_EMAIL}?subject=` +
-  encodeURIComponent("Zalpan demo request") +
-  "&body=" +
-  encodeURIComponent(
-    [
-      "Hi Zalpan team,",
-      "",
-      "I'd like to book a demo.",
-      "",
-      "Name:",
-      "Restaurant / business:",
-      "City:",
-      "No. of outlets:",
-      "Phone:",
-      "Preferred time to call:",
-      "",
-    ].join("\n")
-  );
-
 /** Ways to reach the team. Add phone / form entries here when ready. */
 const contactWays = [
   {
@@ -878,31 +858,25 @@ export default function ZalpanPage() {
             Bring billing, kitchen, stock, customers, payments and growth into
             one connected platform.
           </p>
-          <div className="flex flex-wrap justify-center gap-[14px]">
-            <a href={DEMO_MAILTO} className="inline-flex items-center gap-[10px] rounded-[12px] px-8 py-[17px] font-semibold text-white transition-transform hover:-translate-y-[2px]" style={{ background: "var(--or)", fontSize: 16, boxShadow: "0 16px 34px -14px rgba(240,83,28,0.8)" }}>
-              Book a Demo <span style={{ fontFamily: MONO }}>&rarr;</span>
-            </a>
-          </div>
-
           {/* contact options */}
-          <div className="mt-[44px] flex flex-col items-center gap-[14px]">
+          <div className="flex flex-col items-center gap-[14px]">
             <div style={{ fontFamily: MONO, fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#8A8072" }}>
-              Or reach the team directly
+              Talk to sales
             </div>
             <div className="flex flex-wrap justify-center gap-[12px]">
               {contactWays.map((c) => (
                 <a
                   key={c.label}
                   href={c.href}
-                  className="inline-flex items-center gap-[12px] rounded-[14px] px-[18px] py-[13px] no-underline transition-colors"
+                  className="inline-flex items-center gap-[14px] rounded-[16px] px-[22px] py-[16px] no-underline transition-transform hover:-translate-y-[2px]"
                   style={{ background: "rgba(255,253,248,0.05)", border: "1px solid rgba(255,255,255,0.12)", color: "#fff" }}
                 >
-                  <span className="flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-[10px]" style={{ background: "rgba(240,83,28,0.18)", color: "var(--or2)" }}>
+                  <span className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-[12px]" style={{ background: "var(--or)", color: "#fff", boxShadow: "0 12px 26px -12px rgba(240,83,28,0.8)" }}>
                     {c.icon}
                   </span>
                   <span className="flex flex-col items-start leading-tight">
                     <span style={{ fontFamily: MONO, fontSize: 10.5, letterSpacing: "0.12em", textTransform: "uppercase", color: "#B5AC9E" }}>{c.label}</span>
-                    <span style={{ fontSize: 15, fontWeight: 600 }}>{c.value}</span>
+                    <span style={{ fontFamily: DISPLAY, fontSize: 19, fontWeight: 700, letterSpacing: "-0.01em" }}>{c.value}</span>
                   </span>
                 </a>
               ))}

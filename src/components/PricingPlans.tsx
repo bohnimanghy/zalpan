@@ -2,7 +2,6 @@
 
 import { Reveal } from "@/components/Reveal";
 import { TiltCard } from "@/components/TiltCard";
-import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY } from "@/lib/contact";
 
 const DISPLAY = "var(--font-bricolage), 'Bricolage Grotesque', sans-serif";
 const MONO = "var(--font-plex-mono), 'IBM Plex Mono', monospace";
@@ -81,11 +80,6 @@ const plans: Plan[] = [
     addons: [],
     featured: false,
   },
-];
-
-const salesContacts = [
-  { label: "Call", value: CONTACT_PHONE_DISPLAY, href: `tel:${CONTACT_PHONE}` },
-  { label: "Email", value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
 ];
 
 export function PricingPlans() {
@@ -172,30 +166,13 @@ export function PricingPlans() {
                 <div className="mb-7" />
               )}
 
-              {p.price ? (
-                <a
-                  href="#demo"
-                  className="block rounded-[11px] py-[13px] text-center font-semibold transition-transform hover:-translate-y-[2px]"
-                  style={p.featured ? { background: "var(--or)", color: "#fff", fontSize: 14.5 } : { border: "1px solid var(--zink)", color: "var(--zink)", fontSize: 14.5 }}
-                >
-                  Get started
-                </a>
-              ) : (
-                <div className="flex flex-col gap-[8px]">
-                  <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--or)" }}>Talk to Sales</div>
-                  {salesContacts.map((c) => (
-                    <a
-                      key={c.label}
-                      href={c.href}
-                      className="flex items-center justify-between gap-[10px] rounded-[11px] px-[14px] py-[11px] no-underline transition-transform hover:-translate-y-[2px]"
-                      style={{ border: "1px solid var(--zink)", color: "var(--zink)" }}
-                    >
-                      <span style={{ fontFamily: MONO, fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--zmuted)" }}>{c.label}</span>
-                      <span style={{ fontSize: 13.5, fontWeight: 600, wordBreak: "break-all" }}>{c.value}</span>
-                    </a>
-                  ))}
-                </div>
-              )}
+              <a
+                href="#demo"
+                className="block rounded-[11px] py-[13px] text-center font-semibold transition-transform hover:-translate-y-[2px]"
+                style={p.featured ? { background: "var(--or)", color: "#fff", fontSize: 14.5 } : { border: "1px solid var(--zink)", color: "var(--zink)", fontSize: 14.5 }}
+              >
+                {p.price ? "Get started" : "Talk to Sales"}
+              </a>
             </TiltCard>
           </Reveal>
         ))}
